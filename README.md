@@ -22,8 +22,7 @@ the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
 tk is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+but WITHOUT ANY WARRANTY. See the
 GNU General Public License for more details.
 
 Copyright Rushy Panchal 2013 - 2014. All rights reserved.
