@@ -31,10 +31,19 @@ def getScreenDimensions():
 	'''Returns dimensions of the screen, as (width, height)'''
 	return SCREENDIM
 
-def sys_exit():
+def sys_exit(window = None):
 	'''Exits the program'''
+	if window:
+		window.close()
 	raise SystemExit
 
+def close(window, shutdown = False):
+	'''Closes the window'''
+	if shutdown:
+		sys_exit(window)
+	else:
+		window.close()
+	
 def doNothing():
 	'''Standard cleanup function'''
 	pass
@@ -53,6 +62,49 @@ def findAllWidgets(master, widgetsFound = None):
 		if widget.winfo_class() in PACKING_WIDGETS:
 			widgetsFound.extend(findAllWidgets(widget, widgetsFound))
 	return list(set(widgetsFound))
+	
+def extractFromDict(dictionary, options):
+	'''Extracts values from the dictionary, with default values
+	Options should be formatted as:
+		[
+			(option1, defaultValue),
+			option2 # no default provided, resorts to None
+			]'''
+	return_values = []
+	for option in options:
+		if isinstance(option, (list, tuple)):
+			option_value = dictionary.get(option[0], option[1])
+		else:
+			option_value = dictionary.get(option)
+		return_values.append(option_value)
+	return return_values
+	
+def gridWidgets(widgets, **options):
+	'''Grids the widgets. widgets should look like:
+		[
+		(widget1, widget2, widget3), # first row
+		(widget4, widget5, widget6, ...), # second row
+		(widget7, widget8), # third row, ends in an empty space
+		widget9 # fourth row, has an automatically-adjusted columnspan, set to the length of the longest row (3)
+		...
+		]
+	
+	Supported options:
+		padx, pady (for each individual widget)
+		
+	Note: Unexpected behavior if the widgets are not of the same parent'''
+	
+	padx, pady = extractFromDict(options, [("padx", 5), ("pady", 5)])
+	try:
+		max_row = max(len(row) for row in widgets if isinstance(row, (list, tuple)))
+	except ValueError:
+		max_row = 1
+	for row_number, row in enumerate(widgets, 1):
+		if isinstance(row, (list, tuple)):
+			for column_number, widget in enumerate(row, 1):
+				widget.grid(row = row_number, column = column_number, padx = padx, pady = pady)
+		else:
+			row.grid(row = row_number, column = 1, columnspan = max_row, padx = padx, pady = pady)
 	
 ### Internal Base Classes used in multiple inheritance
 
@@ -85,7 +137,11 @@ class BaseWindow(object):
 	def getScreenDimensions(self):
 		'''Returns window dimensions'''
 		return self.winfo_width(), self.winfo_height()
-
+		
+	def gridWidgets(self, *widgets, **options):
+		'''Grids all of the widgets'''
+		gridWidgets(*widgets, **options)
+		
 	def childWidgets(self):
 		'''Finds all widgets in the main instance'''
 		self.widgetsFound = findAllWidgets(self)
@@ -202,6 +258,10 @@ class BaseCustomWindow(object):
 		'''Calls wm_protocol and changes "name"s function to "func"'''
 		self.master.protocol(name, func)
 
+	def gridWidgets(self, *widgets, **options):
+		'''Grids all of the widgets'''
+		gridWidgets(*widgets, **options)
+		
 	def childWidgets(self):
 		'''Returns all widgets attached to this window'''
 		return self.master.childWidgets()
@@ -262,21 +322,28 @@ class BaseCustomWidget(object):
 			
 ### Internal classes for disambiguation
 
-class _Tk(Tk):
+class TkBase(Tk):
 	'''Mock class for disambiguity'''
 	pass
 
-class _Toplevel(Toplevel):
+class ToplevelBase(Toplevel):
 	'''Mock class for disambiguity'''
 	pass
 
-class _Frame(Frame):
-	'''Mock class for disambiguity'''
-	pass
+class FrameBase(Frame):
+	'''Adds on to the Frame class'''
+	def gridWidgets(self, *widgets, **options):
+		'''Grids all of the widgets'''
+		gridWidgets(*widgets, **options)
+	
+	def childWidgets(self):
+		'''Finds all widgets in the main instance'''
+		self.widgetsFound = findAllWidgets(self)
+		return self.widgetsFound
 	
 ### Inherited classes that add on to existing Tkinter classes
 	
-class Tk(BaseWindow, _Tk):
+class Tk(BaseWindow, TkBase):
 	'''Inherited class that adds methods to tk.Tk'''
 	def __init__(self, **options):
 		self.options = options
@@ -286,13 +353,13 @@ class Tk(BaseWindow, _Tk):
 				del options[option]
 			except KeyError:
 				pass
-		_Tk.__init__(self, **options)
+		TkBase.__init__(self, **options)
 		if self.resizeWin:
 			self.resize()
 		if self.centerWin:
 			self.center()
 
-class Toplevel(BaseWindow, _Toplevel):
+class Toplevel(BaseWindow, ToplevelBase):
 	'''Inherited class that adds methods to tk.Toplevel'''
 	def __init__(self, master = None, **options):
 		self.options, self.master = options, master
@@ -308,18 +375,15 @@ class Toplevel(BaseWindow, _Toplevel):
 				v for k, v in master.options.items() if ((k in root_options) and (k not in options.keys()))})
 			except AttributeError:
 				pass
-		_Toplevel.__init__(self, master, **options)
+		ToplevelBase.__init__(self, master, **options)
 		if self.resizeWin:
 			self.resize()
 		if self.centerWin:
 			self.center()
 
-class Frame(_Frame):
+class Frame(FrameBase):
 	'''Inherited class that adds methods to tk.Frame'''
-	def childWidgets(self):
-		'''Finds all widgets in the main instance'''
-		self.widgetsFound = findAllWidgets(self)
-		return self.widgetsFound
+	pass
 		
 if HAS_PIL:
 	class TkImage:

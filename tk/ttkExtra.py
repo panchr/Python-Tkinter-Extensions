@@ -76,6 +76,14 @@ ENTRY_STYLE, SCALE_STYLE, CHECKBUTTON_STYLE = ALL_STYLES["Entry"], ALL_STYLES["S
 
 ### Additional wrapper classes
 
+class MockFrame(Frame, FrameBase):
+	'''Mock frame class for disambiguity'''
+	pass
+	
+class Frame(MockFrame):
+	'''Inherited Frame class'''
+	pass
+
 class MessageBox(BaseCustomWindow):
 	'''Creates a simple message box
 	Supported options:
