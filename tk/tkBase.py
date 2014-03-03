@@ -102,7 +102,8 @@ def gridWidgets(widgets, **options):
 	for row_number, row in enumerate(widgets, 1):
 		if isinstance(row, (list, tuple)):
 			for column_number, widget in enumerate(row, 1):
-				widget.grid(row = row_number, column = column_number, padx = padx, pady = pady)
+				if widget:
+					widget.grid(row = row_number, column = column_number, padx = padx, pady = pady)
 		else:
 			row.grid(row = row_number, column = 1, columnspan = max_row, padx = padx, pady = pady)
 	
@@ -125,8 +126,8 @@ class BaseWindow(object):
 
 	def resize(self):
 		'''Allows the screen to be resized and moves the widgets to the center'''
-		self.rowconfigure(0, weight = 1)
-		self.columnconfigure(0, weight = 1)
+		self.grid_rowconfigure(0, weight = 1)
+		self.grid_columnconfigure(0, weight = 1)
 
 	def fullscreen(self, showAll = False):
 		'''Makes the window Fullscreen'''
@@ -239,6 +240,7 @@ class BaseCustomWindow(object):
 		try:
 			self.quit()
 			self.destroy()
+			self.closed = True
 		except TclError:
 			pass
 
@@ -422,6 +424,20 @@ if HAS_PIL:
 			
 ### Additional Tkinter wrappers/extensions
 
+class StdoutRedirector(object):
+	'''Redirects sys.stdout to the widget'''
+	def __init__(self, widget):
+		if not isinstance(widget, (Label, Text, ScrolledText)):
+			raise TypeError("Can only use Label or Text widget to redirect sys.stdout")
+		self.widget = widget
+		
+	def write(self, text):
+		'''Writes to the text widget'''
+		self.widget.insert(END, text)
+		if hasattr(self.widget, 'see'):
+			self.widget.see(END)
+		self.widget.update_idletasks()
+
 class EventMenu(Menu):
 	'''Creates a Menu on a widget based off of events
 	Commands are in the format [{'label': label, 'command': command, 'type': type, 'accelerator': accelerator}, ...]
@@ -525,3 +541,28 @@ class VerticalLabel(Label):
 		if 'wraplength' not in kwargs.keys():
 			kwargs['wraplength'] = 1
 		Label.__init__(self, master, *args, **kwargs)
+		
+class CheckButton(Checkbutton):
+	'''Checkbutton wrapper'''
+	def __init__(self, master = None, **options):
+		if 'variable' in options.keys():
+			del options['variable']
+		if 'default' in options.keys():
+			default = options['default']
+			del options['default']
+		else:
+			default = False
+		self.buttonVariable = BooleanVar(master, default)
+		Checkbutton.__init__(self, master, variable = self.buttonVariable, **options)
+		
+	def get(self):
+		'''Gets the current checkbutton value'''
+		return self.buttonVariable.get()
+		
+	def set(self, value):
+		'''Sets the current checkbutton value'''
+		self.buttonVariable.set(value)
+		
+	def toggle(self):
+		'''Toggles the checkbutton on/off'''
+		self.buttonVariable.set(not self.buttonVariable.get())

@@ -719,3 +719,28 @@ class VerticalLabel(Label):
 		if 'wraplength' not in kwargs.keys():
 			kwargs['wraplength'] = 1
 		Label.__init__(self, master, *args, **kwargs)
+		
+class CheckButton(Checkbutton):
+	'''Checkbutton wrapper'''
+	def __init__(self, master = None, **options):
+		if 'variable' in options.keys():
+			del options['variable']
+		if 'default' in options.keys():
+			default = options['default']
+			del options['default']
+		else:
+			default = False
+		self.buttonVariable = BooleanVar(master, default)
+		Checkbutton.__init__(self, master, variable = self.buttonVariable, **options)
+		
+	def get(self):
+		'''Gets the current checkbutton value'''
+		return self.buttonVariable.get()
+		
+	def set(self, value):
+		'''Sets the current checkbutton value'''
+		self.buttonVariable.set(value)
+		
+	def toggle(self):
+		'''Toggles the checkbutton on/off'''
+		self.buttonVariable.set(not self.buttonVariable.get())
