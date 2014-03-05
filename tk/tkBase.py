@@ -25,6 +25,12 @@ screenDim = (root.winfo_screenwidth(), root.winfo_screenheight())
 SCREENDIM = {"width": screenDim[0], "w": screenDim[0], "height": screenDim[1], "h": screenDim[1]}
 PACKING_WIDGETS = ("Tk", "Toplevel", "TFrame", "Labelframe", "TNotebook")
 	
+MENU = "menu"
+SEPARATOR = "separator"
+COMMAND = "command"
+RADIOBUTTON = "radiobutton"
+CHECKBUTTON = "checkbutton"
+	
 ### Functions to be used in advanced GUI building
 	
 def getScreenDimensions():
@@ -331,17 +337,14 @@ class TkBase(Tk):
 class ToplevelBase(Toplevel):
 	'''Mock class for disambiguity'''
 	pass
-
-class FrameBase(Frame):
-	'''Adds on to the Frame class'''
-	def gridWidgets(self, *widgets, **options):
-		'''Grids all of the widgets'''
-		gridWidgets(*widgets, **options)
 	
-	def childWidgets(self):
-		'''Finds all widgets in the main instance'''
-		self.widgetsFound = findAllWidgets(self)
-		return self.widgetsFound
+class FrameBase(Frame):
+	'''Mock class for disambiguity'''
+	pass
+	
+class EntryBase(Entry):
+	'''Mock class for disambiguity'''
+	pass
 	
 ### Inherited classes that add on to existing Tkinter classes
 	
@@ -385,7 +388,27 @@ class Toplevel(BaseWindow, ToplevelBase):
 
 class Frame(FrameBase):
 	'''Inherited class that adds methods to tk.Frame'''
-	pass
+	def gridWidgets(self, *widgets, **options):
+		'''Grids all of the widgets'''
+		gridWidgets(*widgets, **options)
+	
+	def childWidgets(self):
+		'''Finds all widgets in the main instance'''
+		self.widgetsFound = findAllWidgets(self)
+		return self.widgetsFound
+		
+class Entry(EntryBase):
+	'''Inherited class that adds methods to tk.Entry'''
+	def __init__(self, master = None, **options):
+		self.master = master
+		if 'command' in options.keys():
+			self.entryCommand = options['command']
+			del options['command']
+		else:
+			self.entryCommand = None
+		EntryBase.__init__(self, master, **options)
+		if self.entryCommand:
+			self.bind("<Key>", lambda event: self.entryCommand())
 		
 if HAS_PIL:
 	class TkImage:

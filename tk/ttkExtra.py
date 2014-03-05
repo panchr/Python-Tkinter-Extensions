@@ -31,11 +31,6 @@ root.withdraw()
 screenDim = (root.winfo_screenwidth(), root.winfo_screenheight())
 SCREENDIM = {"width": screenDim[0], "w": screenDim[0], "height": screenDim[1], "h": screenDim[1]}
 
-SEPARATOR = "separator"
-COMMAND = "command"
-RADIOBUTTON = "radiobutton"
-CHECKBUTTON = "checkbutton"
-
 ### Functions to be used in advanced GUI-building
 
 def configureStyle(style, label = None, **options):
@@ -76,13 +71,18 @@ ENTRY_STYLE, SCALE_STYLE, CHECKBUTTON_STYLE = ALL_STYLES["Entry"], ALL_STYLES["S
 
 ### Additional wrapper classes
 
-class MockFrame(Frame, FrameBase):
-	'''Mock frame class for disambiguity'''
-	pass
-	
-class Frame(MockFrame):
-	'''Inherited Frame class'''
-	pass
+class Entry(EntryBase):
+	'''Inherited class that adds methods to tk.Entry'''
+	def __init__(self, master = None, **options):
+		self.master = master
+		if 'command' in options.keys():
+			self.entryCommand = options['command']
+			del options['command']
+		else:
+			self.entryCommand = None
+		EntryBase.__init__(self, master, **options)
+		if self.entryCommand:
+			self.bind("<Key>", lambda event: self.entryCommand())
 
 class MessageBox(BaseCustomWindow):
 	'''Creates a simple message box
@@ -432,7 +432,7 @@ class InputWindow(BaseCustomWindow):
 			if (self.defaultValue is None) or not isinstance(self.defaultValue, str):
 				self.defaultValue = ''
 			self.entry = StringVar(self.mainFrame, value = self.defaultValue)
-			self.entryBox = Entry(self.mainFrame, width = self.width, style = "Input.TEntry", textvariable = self.entry, show = self.show)
+			self.entryBox = Entry(self.mainFrame, width = self.width, style = "Input.TEntry", textvariable = self.entry, show = self.show, justify = CENTER)
 			self.entryBox.grid(row = 2, pady = 5)
 		elif self.entryType == int:
 			self.entry = IntVar(self.mainFrame)
@@ -694,7 +694,7 @@ class HyperlinkManager:
 			if tag[:6] == "hyper-":
 				self.links[tag]()
 				return
-				
+
 class ScrolledText(Text):
 	'''Creates a Text widget with a Scrollbar on the side'''
 	def __init__(self, master = None, **options):
@@ -705,6 +705,7 @@ class ScrolledText(Text):
 		Text.__init__(self, self.frame, **options)
 		self.pack(side=LEFT, fill=BOTH, expand=True)
 		self.vbar['command'] = self.yview
+		
 		text_meths = vars(Text).keys()
 		methods = list(vars(Pack).keys()) + list(vars(Grid).keys()) + list(vars(Place).keys())
 		methods = set(methods).difference(text_meths)
