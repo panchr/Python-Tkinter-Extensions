@@ -30,6 +30,11 @@ SEPARATOR = "separator"
 COMMAND = "command"
 RADIOBUTTON = "radiobutton"
 CHECKBUTTON = "checkbutton"
+
+PY_KEYWORDS = ["assert", "break", "continue", "del", "elif", "else", "except", "exec", "eval", "finally", "for", "from",
+	"global", "if" "import", "lambda", "pass", "print", "len", "max", "min", "type", "isinstance"]
+PY_OPERATORS = ["as", "in", "is", "not", "and", "or"]
+PY_OBJECTS = ["int", "long", "float", "bin", "hex", "str", "set", "tuple", "list", "dict", "object", "self", "True", "False", "file", "range", "xrange", "complex"]
 	
 ### Functions to be used in advanced GUI building
 	
@@ -397,6 +402,11 @@ class Frame(FrameBase):
 		self.widgetsFound = findAllWidgets(self)
 		return self.widgetsFound
 		
+	def resize(self):
+		'''Allows the widget to be resized'''
+		self.grid_rowconfigure(0, weight = 1)
+		self.grid_columnconfigure(0, weight = 1)
+		
 class Entry(EntryBase):
 	'''Inherited class that adds methods to tk.Entry'''
 	def __init__(self, master = None, **options):
@@ -453,6 +463,13 @@ class StdoutRedirector(object):
 		if not isinstance(widget, (Label, Text, ScrolledText)):
 			raise TypeError("Can only use Label or Text widget to redirect sys.stdout")
 		self.widget = widget
+		text_meths = vars(Text).keys()
+		methods = vars(Pack).keys() + vars(Grid).keys() + vars(Place).keys()
+		methods = set(methods).difference(text_meths)
+
+		for m in methods:
+			if m[0] != '_' and m != 'config' and m != 'configure':
+				setattr(self, m, getattr(self.widget, m))
 		
 	def write(self, text):
 		'''Writes to the text widget'''

@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tk.latex &mdash; tk 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="tk 1.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">tk 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tk.latex</h1><div class="highlight"><pre>
+# coding=utf-8
+# tk/latex/__init__.py
+# Rushy Panchal
+# v1.0
+
+&#39;&#39;&#39;Provides Latex-type text editing, to be used in Tkinter Text widgets&#39;&#39;&#39;
+
+try: from Tkinter import *
+except ImportError: from tkinter import *
+from latexConstants import *
+from Symbols import *
+	
+__modules__ = {&#39;base&#39;: [
+		&#39;__init__.py&#39;,
+		&#39;Symbols.py&#39;,
+		&#39;latexConstants.py&#39;,
+		&#39;LatexText.py&#39;,
+		&#39;ttkLatexText.py&#39;
+		]
+	}
+
+__author__ = &quot;Rushy Panchal&quot;
+
+__version__ = 1.0
+
+### Main Patterns
+
+patterns = {
+	r&#39;_&#39;: Replace(&quot;\_ ?\{([^}]+)\}&quot;, r&#39;&lt;sub&gt;\1&lt;/sub&gt;&#39;),
+	r&#39;^&#39;: Replace(&quot;\^ ?\{([^}]+)\}&quot;, r&#39;&lt;sup&gt;\1&lt;/sup&gt;&#39;),
+	r&#39;%&#39;: Replace(&quot;\{([^}]+)\} ?% ?\{([^}]+)\}&quot;, r&#39;&lt;num&gt;\1&lt;/num&gt;&lt;div&gt;\2&lt;/div&gt;&#39;),
+	r&#39;\pm&#39;: MathematicalSymbol(PLUS_OR_MINUS, r&#39;\pm&#39;, r&#39;\PM&#39;),
+	r&#39;\le&#39;: MathematicalSymbol(LESS_OR_EQUAL, r&#39;\le&#39;, r&#39;\LE&#39;, &#39;&lt;=&#39;),
+	r&#39;\ge&#39;: MathematicalSymbol(GREATER_OR_EQUAL, r&#39;\ge&#39;, r&#39;\GE&#39;, &#39;&gt;=&#39;),
+	r&#39;\eq&#39;: MathematicalSymbol(EQUAL, r&#39;\eq&#39;, r&#39;\eq&#39;, &#39;=&#39;),
+	r&#39;neq&#39;: MathematicalSymbol(NOT_EQUAL, r&#39;\neq&#39;, r&#39;\NEQ&#39;, &#39;!=&#39;),
+	r&#39;\approx&#39;: MathematicalSymbol(APPROXIMATE, r&#39;\approx&#39;, r&#39;\APPROX&#39;, &#39;~~&#39;),
+	r&#39;\Alpha&#39;: GreekLetter(ALPHA, r&#39;\Alpha&#39;, r&#39;\ALPHA&#39;),
+	r&#39;\alpha&#39;: GreekLetter(LOWER_ALPHA, r&#39;\\alpha&#39;),
+	r&#39;\Beta&#39;: GreekLetter(BETA, r&#39;\Beta&#39;, r&#39;\BETA&#39;),
+	r&#39;\beta&#39;: GreekLetter(LOWER_BETA, r&#39;\beta&#39;),
+	r&#39;\Gamma&#39;: GreekLetter(GAMMA, r&#39;\Gamma&#39;, r&#39;\GAMMA&#39;),
+	r&#39;\gamma&#39;: GreekLetter(LOWER_GAMMA, r&#39;\gamma&#39;),
+	r&#39;\Delta&#39;: GreekLetter(DELTA, r&#39;\Delta&#39;, r&#39;\DELTA&#39;),
+	r&#39;\delta&#39;: GreekLetter(LOWER_DELTA, r&#39;\delta&#39;),
+	r&#39;\Epsilon&#39;: GreekLetter(EPSILON, r&#39;\Epsilon&#39;, r&#39;\EPSILON&#39;),
+	r&#39;\epsilon&#39;: GreekLetter(LOWER_EPSILON, r&#39;\epsilon&#39;),
+	r&#39;\Zeta&#39;: GreekLetter(ZETA, r&#39;\Zeta&#39;, r&#39;\ZETA&#39;),
+	r&#39;\zeta&#39;: GreekLetter(LOWER_ZETA, r&#39;\zeta&#39;),
+	r&#39;\Eta&#39;: GreekLetter(ETA, r&#39;\Eta&#39;, r&#39;\ETA&#39;),
+	r&#39;\eta&#39;: GreekLetter(LOWER_ETA, r&#39;\eta&#39;),
+	r&#39;\Theta&#39;: GreekLetter(THETA, r&#39;\Theta&#39;, r&#39;\THETA&#39;),
+	r&#39;\theta&#39;: GreekLetter(LOWER_THETA, r&#39;\theta&#39;),
+	r&#39;\Iota&#39;: GreekLetter(IOTA, r&#39;\Iota&#39;, r&#39;\IOTA&#39;),
+	r&#39;\iota&#39;: GreekLetter(LOWER_IOTA, r&#39;\iota&#39;),
+	r&#39;\Kappa&#39;: GreekLetter(KAPPA, r&#39;\Kappa&#39;, r&#39;\KAPPA&#39;),
+	r&#39;\kappa&#39;: GreekLetter(LOWER_KAPPA, r&#39;\kappa&#39;),
+	r&#39;\Lambda&#39;: GreekLetter(LAMBDA, r&#39;\Lambda&#39;, r&#39;\LAMBDA&#39;),
+	r&#39;\lambda&#39;: GreekLetter(LOWER_LAMBDA, r&#39;\lambda&#39;),
+	r&#39;\Mu&#39;: GreekLetter(MU, r&#39;\Mu&#39;, r&#39;\MU&#39;),
+	r&#39;\mu&#39;: GreekLetter(LOWER_MU, r&#39;\mu&#39;),
+	r&#39;\Nu&#39;: GreekLetter(NU, r&#39;\Nu&#39;, r&#39;\NU&#39;),
+	r&#39;\nu&#39;: GreekLetter(LOWER_NU, r&#39;\nu&#39;),
+	r&#39;\Xi&#39;: GreekLetter(XI, r&#39;\Xi&#39;, r&#39;\XI&#39;),
+	r&#39;\xi&#39;: GreekLetter(LOWER_XI, r&#39;\xi&#39;),
+	r&#39;\Omicron&#39;: GreekLetter(OMICRON, r&#39;\Omicron&#39;, r&#39;\OMICRON&#39;),
+	r&#39;\omicron&#39;: GreekLetter(LOWER_OMICRON, r&#39;\omicron&#39;),
+	r&#39;\Pi&#39;: GreekLetter(PI, r&#39;\Pi&#39;, r&#39;\PI&#39;),
+	r&#39;\pi&#39;: GreekLetter(LOWER_PI, r&#39;\pi&#39;),
+	r&#39;\Rho&#39;: GreekLetter(RHO, r&#39;\Rho&#39;, r&#39;\RHO&#39;),
+	r&#39;\rho&#39;: GreekLetter(LOWER_RHO, r&#39;\rho&#39;),
+	r&#39;\Sigma&#39;: GreekLetter(SIGMA, r&#39;\Sigma&#39;, r&#39;\SIGMA&#39;),
+	r&#39;\sigma&#39;: GreekLetter(LOWER_SIGMA, r&#39;\sigma&#39;),
+	r&#39;\Tau&#39;: GreekLetter(TAU, r&#39;\Tau&#39;, r&#39;\TAU&#39;),
+	r&#39;\tau&#39;: GreekLetter(LOWER_TAU, r&#39;\tau&#39;),
+	r&#39;\Upsilon&#39;: GreekLetter(UPSILON, r&#39;\Upsilon&#39;, r&#39;\UPSILON&#39;),
+	r&#39;\upsilon&#39;: GreekLetter(LOWER_UPSILON, r&#39;\upsilon&#39;),
+	r&#39;\Phi&#39;: GreekLetter(PHI, r&#39;\Phi&#39;, r&#39;\PHI&#39;),
+	r&#39;\phi&#39;: GreekLetter(LOWER_PHI, r&#39;\phi&#39;),
+	r&#39;\Chi&#39;: GreekLetter(CHI, r&#39;\Chi&#39;, r&#39;\CHI&#39;),
+	r&#39;\chi&#39;: GreekLetter(LOWER_CHI, r&#39;\chi&#39;),
+	r&#39;\Psi&#39;: GreekLetter(PSI, r&#39;\Psi&#39;, &#39;\PSI&#39;),
+	r&#39;\psi&#39;: GreekLetter(LOWER_PSI, r&#39;\psi&#39;),
+	r&#39;\Omega&#39;: GreekLetter(OMEGA, r&#39;\Omega&#39;, r&#39;\OMEGA&#39;),
+	r&#39;\omega&#39;: GreekLetter(LOWER_OMEGA, r&#39;\omega&#39;)
+	}
+	
+### Main functions
+	
+<div class="viewcode-block" id="latexHelp"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.latexHelp">[docs]</a>def latexHelp(cmd = None):
+	&#39;&#39;&#39;Shows help on the given command, if any&#39;&#39;&#39;
+	cmd_help = {
+		&#39;_&#39;: &#39;Subscript&#39;, 
+		&#39;^&#39;: &#39;Superscript&#39;,
+		&#39;%&#39;: &#39;Division/Fraction&#39;,
+		&#39;\pm&#39;: &#39;Plus or Minus: &#39; + PLUS_OR_MINUS,
+		&#39;\le&#39;: &#39;Less Than or Equal To: &#39; + LESS_OR_EQUAL,
+		&#39;\ge&#39;: &#39;Greater Than or Equal To: &#39; + GREATER_OR_EQUAL,
+		&#39;\eq&#39;: &#39;Equal To: &#39; + EQUAL,
+		&#39;\neq&#39;: &#39;Not Equal To: &#39; + NOT_EQUAL,
+		&#39;\approx&#39;: &#39;Approximately Equivalent To: &#39; + APPROXIMATE,
+		}
+	if cmd:
+		try: print(cmd_help[cmd])
+		except KeyError: print(&quot;Not a valid Latex command.&quot;)
+	else:
+		for cmd, help_text in cmd_help.items():
+			print(cmd, help_text)
+</div>
+<div class="viewcode-block" id="getPatterns"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.getPatterns">[docs]</a>def getPatterns():
+	&#39;&#39;&#39;Returns the Replace patterns&#39;&#39;&#39;
+	return patterns
+</div>
+<div class="viewcode-block" id="isCompiled"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.isCompiled">[docs]</a>def isCompiled(text):
+	&#39;&#39;&#39;Returns whether or not the text is Latex-compiled&#39;&#39;&#39;
+	return isinstance(text, CompiledLatex)
+
+### Main classes
+	</div>
+<div class="viewcode-block" id="Latex"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.Latex">[docs]</a>class Latex(unicode):
+	&#39;&#39;&#39;Basic latex editing class&#39;&#39;&#39;
+	def __init__(self, text):
+		self.text = text
+		self.patterns = getPatterns()
+		self.compiled = False
+		str.__init__(self, text)
+
+<div class="viewcode-block" id="Latex.add"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.Latex.add">[docs]</a>	def add(self, text):
+		&#39;&#39;&#39;Adds text to the existing text&#39;&#39;&#39;
+		self.text += text
+		self.compiled = False
+</div>
+<div class="viewcode-block" id="Latex.addLine"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.Latex.addLine">[docs]</a>	def addLine(self, text):
+		&#39;&#39;&#39;Adds text, on a new line, to the existing text&#39;&#39;&#39;
+		self.add(&#39;\n&#39; + text)
+		self.compiled = False
+</div>
+<div class="viewcode-block" id="Latex.isCompiled"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.Latex.isCompiled">[docs]</a>	def isCompiled(self):
+		&#39;&#39;&#39;Returns whether or not the current text is completely compiled&#39;&#39;&#39;
+		return self.compiled
+		</div>
+<div class="viewcode-block" id="Latex.compile"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.Latex.compile">[docs]</a>	def compile(self):
+		&#39;&#39;&#39;Compiles the latex into a tk.LatexText readable format&#39;&#39;&#39;
+		if not self.compiled:
+			self.compiled_text = CompiledLatex.compile(self.text)
+			self.compiled = True
+		return self.compiled_text
+		</div></div>
+<div class="viewcode-block" id="CompiledLatex"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.CompiledLatex">[docs]</a>class CompiledLatex(unicode):
+	&#39;&#39;&#39;Internal class for a &quot;compiled&quot;, tk.LatexText readable text&#39;&#39;&#39;
+	def __init__(self, text):
+		self.patterns = getPatterns()
+		if not self.isCompiled(text): raise ValueError(&quot;Text was not compiled correctly.&quot;)
+		self.text = text
+		
+<div class="viewcode-block" id="CompiledLatex.isCompiled"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.CompiledLatex.isCompiled">[docs]</a>	def isCompiled(self, text):
+		&#39;&#39;&#39;Determines if the text is compiled&#39;&#39;&#39;
+		for pattern, replacer in self.patterns.items():
+			if pattern in text: return False
+		return True
+		</div>
+	@staticmethod
+<div class="viewcode-block" id="CompiledLatex.compile"><a class="viewcode-back" href="../../tk.latex.html#tk.latex.CompiledLatex.compile">[docs]</a>	def compile(text):
+		&#39;&#39;&#39;Compiles the given text&#39;&#39;&#39;
+		compiled_text = text
+		patterns = getPatterns()
+		for pattern, replacer in patterns.items():
+			compiled_text = replacer(compiled_text)
+		return CompiledLatex(compiled_text)
+</div>
+	def __repr__(self):
+		&#39;&#39;&#39;String representation&#39;&#39;&#39;
+		return self.text</div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">tk 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Rushy Panchal.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

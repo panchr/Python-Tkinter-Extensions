@@ -69,8 +69,16 @@ ALL_STYLES = createBaseStyles(root)
 LABEL_STYLE, BUTTON_STYLE, RADIOBUTTON_STYLE, MENUBUTTON_STYLE = ALL_STYLES["Label"], ALL_STYLES["Button"], ALL_STYLES["Radiobutton"], ALL_STYLES["Menubutton"]
 ENTRY_STYLE, SCALE_STYLE, CHECKBUTTON_STYLE = ALL_STYLES["Entry"], ALL_STYLES["Scale"], ALL_STYLES["Checkbutton"]
 
-### Additional wrapper classes
+### Extensions onto original classes
 
+class EntryBase(Entry):
+	'''Mock class for disambiguity'''
+	pass
+	
+class FrameBase(Frame):
+	'''Mock class for disambiguity'''
+	pass
+	
 class Entry(EntryBase):
 	'''Inherited class that adds methods to tk.Entry'''
 	def __init__(self, master = None, **options):
@@ -84,6 +92,24 @@ class Entry(EntryBase):
 		if self.entryCommand:
 			self.bind("<Key>", lambda event: self.entryCommand())
 
+class Frame(FrameBase):
+	'''Inherited class that adds methods to tk.Frame'''
+	def gridWidgets(self, *widgets, **options):
+		'''Grids all of the widgets'''
+		gridWidgets(*widgets, **options)
+	
+	def childWidgets(self):
+		'''Finds all widgets in the main instance'''
+		self.widgetsFound = findAllWidgets(self)
+		return self.widgetsFound
+		
+	def resize(self):
+		'''Allows the widget to be resized'''
+		self.grid_rowconfigure(0, weight = 1)
+		self.grid_columnconfigure(0, weight = 1)
+			
+### Additional wrapper classes
+			
 class MessageBox(BaseCustomWindow):
 	'''Creates a simple message box
 	Supported options:
@@ -745,3 +771,42 @@ class CheckButton(Checkbutton):
 	def toggle(self):
 		'''Toggles the checkbutton on/off'''
 		self.buttonVariable.set(not self.buttonVariable.get())
+		
+class CodeEditor(ScrolledText):
+	'''Implements a Code-editor-type widget, with syntax highlighting'''
+	def __init__(self, master = None, **options):
+		self.master = master
+		if 'syntaxcolors' in options.keys():
+			self.colors = options['syntaxcolors']
+			del options['syntaxcolors']
+		else:
+			self.colors = {"keyword": "orange", "object": "purple", "operator": "red", "variable": "blue", "string": "green"}
+		ScrolledText.__init__(self, master, **options)
+		self.bind("<Control-a>", lambda event: self.selectAll())
+		for syntax in ("keyword", "object", "operator", "variable", "string"):
+			self.tag_configure(syntax, foreground = self.colors[syntax])
+		
+		
+	def highlight(self):
+		'''Highlights all of the syntax'''
+		self.tag_words("keyword", *PY_KEYWORDS)
+		self.tag_words("object", *PY_OBJECTS)
+		self.tag_words("operator", *PY_OPERATORS)
+		
+	def selectAll(self):
+		'''Selects all of the text'''
+		self.tag_add("sel", "1.0", END)
+		
+	def tag_words(self, tag, *words):
+		'''Applies the tag to the words'''
+		for word in words:
+			index = "1.0"
+			while index:
+				pattern = "( |\()({word})( |\))".format(word = word) # only want to find this word, surrounded by a space, " ", or a parenthesis --- no partial words
+				# pattern = word
+				index = self.search(pattern, index, END, regexp = True)
+				if index:
+					line, char = index.split('.')
+					endIndex = "{line}.{char}".format(line = line, char = int(char) + len(word))
+					self.tag_add(tag, index, endIndex)
+					index = endIndex

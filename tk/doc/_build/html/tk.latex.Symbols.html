@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tk.latex.Symbols module &mdash; tk 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="tk 1.0 documentation" href="index.html" />
+    <link rel="up" title="tk.latex package" href="tk.latex.html" />
+    <link rel="next" title="tk.latex.latexConstants module" href="tk.latex.latexConstants.html" />
+    <link rel="prev" title="tk.latex.LatexText module" href="tk.latex.LatexText.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tk.latex.latexConstants.html" title="tk.latex.latexConstants module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tk.latex.LatexText.html" title="tk.latex.LatexText module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">tk 1.0 documentation</a> &raquo;</li>
+          <li><a href="tk.html" >tk package</a> &raquo;</li>
+          <li><a href="tk.latex.html" accesskey="U">tk.latex package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-tk.latex.Symbols">
+<span id="tk-latex-symbols-module"></span><h1>tk.latex.Symbols module<a class="headerlink" href="#module-tk.latex.Symbols" title="Permalink to this headline">¶</a></h1>
+<p>Provides the main basis of the text-processing part of the latex subpackage.
+Not intended to be imported directly. Instead, import tk.latex.</p>
+<dl class="class">
+<dt id="tk.latex.Symbols.BaseSymbol">
+<em class="property">class </em><tt class="descclassname">tk.latex.Symbols.</tt><tt class="descname">BaseSymbol</tt><a class="reference internal" href="_modules/tk/latex/Symbols.html#BaseSymbol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.latex.Symbols.BaseSymbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal base class for all Symbols</p>
+<dl class="method">
+<dt id="tk.latex.Symbols.BaseSymbol.compile">
+<tt class="descname">compile</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="_modules/tk/latex/Symbols.html#BaseSymbol.compile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.latex.Symbols.BaseSymbol.compile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns tk.LatexText readable text</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.latex.Symbols.GreekLetter">
+<em class="property">class </em><tt class="descclassname">tk.latex.Symbols.</tt><tt class="descname">GreekLetter</tt><big>(</big><em>symbol</em>, <em>*commands</em><big>)</big><a class="reference internal" href="_modules/tk/latex/Symbols.html#GreekLetter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.latex.Symbols.GreekLetter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tk.latex.Symbols.BaseSymbol" title="tk.latex.Symbols.BaseSymbol"><tt class="xref py py-class docutils literal"><span class="pre">tk.latex.Symbols.BaseSymbol</span></tt></a></p>
+<p>Main class for Greek Letters</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.latex.Symbols.MathematicalSymbol">
+<em class="property">class </em><tt class="descclassname">tk.latex.Symbols.</tt><tt class="descname">MathematicalSymbol</tt><big>(</big><em>symbol</em>, <em>*commands</em><big>)</big><a class="reference internal" href="_modules/tk/latex/Symbols.html#MathematicalSymbol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.latex.Symbols.MathematicalSymbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tk.latex.Symbols.BaseSymbol" title="tk.latex.Symbols.BaseSymbol"><tt class="xref py py-class docutils literal"><span class="pre">tk.latex.Symbols.BaseSymbol</span></tt></a></p>
+<p>Main class for mathematical symbols</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.latex.Symbols.Replace">
+<em class="property">class </em><tt class="descclassname">tk.latex.Symbols.</tt><tt class="descname">Replace</tt><big>(</big><em>pattern</em>, <em>replacement</em>, <em>*flags</em><big>)</big><a class="reference internal" href="_modules/tk/latex/Symbols.html#Replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.latex.Symbols.Replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal class for Regex substitutions</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.latex.Symbols.SimpleReplace">
+<em class="property">class </em><tt class="descclassname">tk.latex.Symbols.</tt><tt class="descname">SimpleReplace</tt><big>(</big><em>replacement</em>, <em>*patterns</em><big>)</big><a class="reference internal" href="_modules/tk/latex/Symbols.html#SimpleReplace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.latex.Symbols.SimpleReplace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal class for String substitutions</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tk.latex.LatexText.html"
+                        title="previous chapter">tk.latex.LatexText module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tk.latex.latexConstants.html"
+                        title="next chapter">tk.latex.latexConstants module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tk.latex.Symbols.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tk.latex.latexConstants.html" title="tk.latex.latexConstants module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tk.latex.LatexText.html" title="tk.latex.LatexText module"
+             >previous</a> |</li>
+        <li><a href="index.html">tk 1.0 documentation</a> &raquo;</li>
+          <li><a href="tk.html" >tk package</a> &raquo;</li>
+          <li><a href="tk.latex.html" >tk.latex package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Rushy Panchal.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>
