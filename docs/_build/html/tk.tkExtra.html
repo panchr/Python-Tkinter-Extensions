@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tk.tkExtra module &mdash; tk 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="tk 1.0.1 documentation" href="index.html" />
+    <link rel="up" title="tk package" href="tk.html" />
+    <link rel="next" title="tk.ttkExtra module" href="tk.ttkExtra.html" />
+    <link rel="prev" title="tk.tkBase module" href="tk.tkBase.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tk.ttkExtra.html" title="tk.ttkExtra module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tk.tkBase.html" title="tk.tkBase module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">tk 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="tk.html" accesskey="U">tk package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-tk.tkExtra">
+<span id="tk-tkextra-module"></span><h1>tk.tkExtra module<a class="headerlink" href="#module-tk.tkExtra" title="Permalink to this headline">¶</a></h1>
+<p>tkExtra adds on to existing Tkinter classes and functions
+By doing so, it is easier to accomplish common tasks, such as centering a Tk() or Toplevel() instance</p>
+<dl class="class">
+<dt id="tk.tkExtra.Calltip">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">Calltip</tt><big>(</big><em>widget</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Calltip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Calltip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tk.tkExtra.Tooltip" title="tk.tkExtra.Tooltip"><tt class="xref py py-class docutils literal"><span class="pre">tk.tkExtra.Tooltip</span></tt></a></p>
+<p>Maintained for backwards-compatibility</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.tkExtra.Hyperlink">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">Hyperlink</tt><big>(</big><em>master=None</em>, <em>text=''</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Hyperlink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Hyperlink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">Tkinter.Label</span></tt></p>
+<p>Uses a Label widget as a hyperlink
+Supported options:
+link, command, underline, justify, activeColor, activatedColor, inactiveColor, bindings</p>
+<dl class="method">
+<dt id="tk.tkExtra.Hyperlink.click">
+<tt class="descname">click</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Hyperlink.click"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Hyperlink.click" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.tkExtra.Infobox">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">Infobox</tt><big>(</big><em>widget=None</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Infobox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Infobox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an information box, based on a widget
+Supported options:
+title, text, fg, bg, font, events, delay, widget, offsetX, offsetY, width, height, cleanup</p>
+<dl class="method">
+<dt id="tk.tkExtra.Infobox.show">
+<tt class="descname">show</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Infobox.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Infobox.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the infobox</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.tkExtra.InputWindow">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">InputWindow</tt><big>(</big><em>master=None</em>, <em>prompt=''</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#InputWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.InputWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tk.tkBase.html#tk.tkBase.BaseCustomWindow" title="tk.tkBase.BaseCustomWindow"><tt class="xref py py-class docutils literal"><span class="pre">tk.tkBase.BaseCustomWindow</span></tt></a></p>
+<p>Creates an Entry Window with a prompt and space to enter input
+Supported options:
+title, font, binding, type, to, from, defaultValue, width, buttonFont, exitCommand = quitCommand, cleanup, okText = goText, buttonWidth, center, resize, offsetX, offsetY</p>
+<dl class="method">
+<dt id="tk.tkExtra.InputWindow.get">
+<tt class="descname">get</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#InputWindow.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.InputWindow.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the selected value</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.tkExtra.MessageBox">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">MessageBox</tt><big>(</big><em>master=None</em>, <em>message=''</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#MessageBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.MessageBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tk.tkBase.html#tk.tkBase.BaseCustomWindow" title="tk.tkBase.BaseCustomWindow"><tt class="xref py py-class docutils literal"><span class="pre">tk.tkBase.BaseCustomWindow</span></tt></a></p>
+<p>Creates a simple message box
+Supported options:
+title, message, font, fg, bg, resize, button, command, buttonFg, buttonBg, width, buttonFont, offsetX, offsetY, cleanup</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.tkExtra.MultipleOptionsWindow">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">MultipleOptionsWindow</tt><big>(</big><em>master=None</em>, <em>prompt=''</em>, <em>*choices</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#MultipleOptionsWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.MultipleOptionsWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tk.tkBase.html#tk.tkBase.BaseCustomWindow" title="tk.tkBase.BaseCustomWindow"><tt class="xref py py-class docutils literal"><span class="pre">tk.tkBase.BaseCustomWindow</span></tt></a></p>
+<p>Creates a window with checkboxes representing multiple options
+Supported options:
+title, fg, bg, font, binding, buttonFont, maxRow, exitCommand = quitCommand, cleanup, okText = goText, center, resize, offsetX, offsetY</p>
+<dl class="method">
+<dt id="tk.tkExtra.MultipleOptionsWindow.get">
+<tt class="descname">get</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#MultipleOptionsWindow.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.MultipleOptionsWindow.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.tkExtra.OptionsWindow">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">OptionsWindow</tt><big>(</big><em>master=None</em>, <em>prompt=''</em>, <em>*choices</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#OptionsWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.OptionsWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tk.tkBase.html#tk.tkBase.BaseCustomWindow" title="tk.tkBase.BaseCustomWindow"><tt class="xref py py-class docutils literal"><span class="pre">tk.tkBase.BaseCustomWindow</span></tt></a></p>
+<p>Creates an Options window with a question, with Radiobuttons representing each option
+Supported options:
+title, font, optionSize, optionFont, defaultOption, binding, maxRow, indicatoron, exitCommand = quitCommand, cleanup, okText = goText, center, resize, offsetX, offsetY</p>
+<dl class="method">
+<dt id="tk.tkExtra.OptionsWindow.createBinding">
+<tt class="descname">createBinding</tt><big>(</big><em>button</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#OptionsWindow.createBinding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.OptionsWindow.createBinding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an event-driven binding</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.tkExtra.OptionsWindow.get">
+<tt class="descname">get</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#OptionsWindow.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.OptionsWindow.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the selected value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.tkExtra.OptionsWindow.selectAndQuit">
+<tt class="descname">selectAndQuit</tt><big>(</big><em>button</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#OptionsWindow.selectAndQuit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.OptionsWindow.selectAndQuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects the button and quits the window</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.tkExtra.Prompt">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">Prompt</tt><big>(</big><em>master=None</em>, <em>prompt=''</em>, <em>*choices</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Prompt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Prompt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tk.tkBase.html#tk.tkBase.BaseCustomWindow" title="tk.tkBase.BaseCustomWindow"><tt class="xref py py-class docutils literal"><span class="pre">tk.tkBase.BaseCustomWindow</span></tt></a></p>
+<p>Creates a basic prompt with a question, with Buttons representing each option
+Supported options:
+title, font, buttonSize, buttonFont, exitCommand = quitCommand, cleanup, defaultButton, defaultBinding, maxRow, center, resize, offsetX, offsetY</p>
+<dl class="method">
+<dt id="tk.tkExtra.Prompt.createBinding">
+<tt class="descname">createBinding</tt><big>(</big><em>button</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Prompt.createBinding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Prompt.createBinding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.tkExtra.Prompt.get">
+<tt class="descname">get</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Prompt.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Prompt.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the selected value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.tkExtra.Prompt.setOption">
+<tt class="descname">setOption</tt><big>(</big><em>option</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Prompt.setOption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Prompt.setOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the option and destroys the Prompt: only to be used internally</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.tkExtra.Statusbar">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">Statusbar</tt><big>(</big><em>master=None</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Statusbar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Statusbar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">Tkinter.Canvas</span></tt></p>
+<p>Creates a Statusbar widget</p>
+<dl class="method">
+<dt id="tk.tkExtra.Statusbar.change">
+<tt class="descname">change</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Statusbar.change"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Statusbar.change" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes the value as a percent</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.tkExtra.Statusbar.configure">
+<tt class="descname">configure</tt><big>(</big><em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Statusbar.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Statusbar.configure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.tkExtra.Statusbar.setValue">
+<tt class="descname">setValue</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Statusbar.setValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Statusbar.setValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the value of the status bar as a percent</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.tkExtra.Tooltip">
+<em class="property">class </em><tt class="descclassname">tk.tkExtra.</tt><tt class="descname">Tooltip</tt><big>(</big><em>widget</em>, <em>**options</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Tooltip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Tooltip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a window similar to IDLE&#8217;s tool-tips
+Supported options:
+widget, text, fg, bg, font, delay, event = binding, events = bindings, leave, offsetX, offset, cleanup</p>
+<dl class="method">
+<dt id="tk.tkExtra.Tooltip.show">
+<tt class="descname">show</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/tk/tkExtra.html#Tooltip.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.tkExtra.Tooltip.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows the tooltip</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tk.tkBase.html"
+                        title="previous chapter">tk.tkBase module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tk.ttkExtra.html"
+                        title="next chapter">tk.ttkExtra module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tk.tkExtra.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tk.ttkExtra.html" title="tk.ttkExtra module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tk.tkBase.html" title="tk.tkBase module"
+             >previous</a> |</li>
+        <li><a href="index.html">tk 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="tk.html" >tk package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Rushy Panchal.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>
