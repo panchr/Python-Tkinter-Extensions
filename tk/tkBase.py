@@ -724,7 +724,7 @@ class EventMenu(Menu):
 			elif _type == COMMAND:
 				self.add_command(label = d.get("label"), command = d.get("command"), accelerator = d.get("accelerator"))
 			elif _type == MENU:
-			self.add_cascade(label = d.get("label"), menu = d.get("menu"))
+				self.add_cascade(label = d.get("label"), menu = d.get("menu"))
 		self.widget.bind(self.binding, lambda event: self.show(event))
 
 	def show(self, event):
