@@ -2,8 +2,19 @@
 # Rushy Panchal
 # v1.11
 
-'''tkExtra adds on to existing Tkinter classes and functions
-By doing so, it is easier to accomplish common tasks, such as centering a Tk() or Toplevel() instance'''
+'''tkExtra adds on to existing ttk classes and functions.
+By doing so, it is easier to accomplish common tasks.
+It also creates custom, frequently used classes that extend existing Tkinter classes.
+
+Other features include:
+	- Automatic gridding of widgets in a structured format
+	- Generation of Base Styles for a main window
+	- Simple style naming and configuration
+	- Tooltip support for any widget
+	- Extensions onto existing Tkinter classes
+	- Custom windows and widgets for common tasks
+	
+This module uses the standard Tkinter package.'''
 
 ### Change Log:
 	# v1.0: Initial Release: Addition of methods onto existing Tkinter classes via inheritance

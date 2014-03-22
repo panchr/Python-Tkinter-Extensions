@@ -2,9 +2,19 @@
 # Rushy Panchal
 # v2.0
 
-'''ttkExtra adds on to existing ttk classes and functions
-By doing so, it is easier to accomplish common tasks, such as centering a Tk() or Toplevel() instance
-It also creates custom, frequently used classes'''
+'''ttkExtra adds on to existing ttk classes and functions.
+By doing so, it is easier to accomplish common tasks.
+It also creates custom, frequently used classes that extend existing Tkinter classes.
+
+Other features include:
+	- Automatic gridding of widgets in a structured format
+	- Generation of Base Styles for a main window
+	- Simple style naming and configuration
+	- Tooltip support for any widget
+	- Extensions onto existing Tkinter classes
+	- Custom windows and widgets for common tasks
+	
+This specific module utilizes the ttk package, with support for styling and themed widgets.'''
 
 ### Change Log:
 	# v1.0: Initial Release: Addition of methods onto existing Tkinter classes via inheritance
@@ -667,7 +677,9 @@ class EventMenu(Menu):
 			self.add_radiobutton(label = d.get("label"), command = d.get('command'), accelerator = d.get("accelerator", variable = self.var, value = d.get("label")))
 		elif _type == COMMAND:
 			self.add_command(label = d.get("label"), command = d.get("command"), accelerator = d.get("accelerator"))
-	
+		elif _type == MENU:
+			self.add_cascade(label = d.get("label"), menu = d.get("menu"))
+
 	def show(self, event):
 		'''Shows the window'''
 		self.event = event
