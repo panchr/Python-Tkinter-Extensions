@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tk.latex.Symbols &mdash; tk 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="tk 1.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="tk.latex" href="../latex.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">tk 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../latex.html" accesskey="U">tk.latex</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tk.latex.Symbols</h1><div class="highlight"><pre>
+# coding=utf-8
+# tk/latex/Symbols.py
+# Rushy Panchal
+# v1.0
+
+&#39;&#39;&#39;Provides the main basis of the text-processing part of the latex subpackage.
+Not intended to be imported directly. Instead, import tk.latex.&#39;&#39;&#39;
+
+from latexConstants import *
+import re
+
+### Main classes
+
+<div class="viewcode-block" id="Replace"><a class="viewcode-back" href="../../../tk.latex.Symbols.html#tk.latex.Symbols.Replace">[docs]</a>class Replace:
+	&#39;&#39;&#39;Internal class for Regex substitutions&#39;&#39;&#39;
+	def __init__(self, pattern, replacement, *flags):
+		self.pattern = re.compile(pattern, *flags)
+		self.replacement = replacement
+	
+	def __call__(self, string):
+		&#39;&#39;&#39;Returns the replaced string&#39;&#39;&#39;
+		return self.pattern.sub(self.replacement, string)
+</div>
+<div class="viewcode-block" id="SimpleReplace"><a class="viewcode-back" href="../../../tk.latex.Symbols.html#tk.latex.Symbols.SimpleReplace">[docs]</a>class SimpleReplace:
+	&#39;&#39;&#39;Internal class for String substitutions&#39;&#39;&#39;
+	def __init__(self, replacement, *patterns):
+		self.patterns = patterns
+		self.replacement = replacement
+
+	def __call__(self, text):
+		&#39;&#39;&#39;Returns the replaced string&#39;&#39;&#39;
+		new_text = text
+		for pattern in self.patterns:
+			new_text = new_text.replace(pattern, self.replacement)
+		return new_text
+</div>
+<div class="viewcode-block" id="BaseSymbol"><a class="viewcode-back" href="../../../tk.latex.Symbols.html#tk.latex.Symbols.BaseSymbol">[docs]</a>class BaseSymbol:
+	&#39;&#39;&#39;Internal base class for all Symbols&#39;&#39;&#39;
+<div class="viewcode-block" id="BaseSymbol.compile"><a class="viewcode-back" href="../../../tk.latex.Symbols.html#tk.latex.Symbols.BaseSymbol.compile">[docs]</a>	def compile(self, text):
+		&#39;&#39;&#39;Returns tk.LatexText readable text&#39;&#39;&#39;
+		return self.replacer(text)
+</div>
+	def __call__(self, text):
+		&#39;&#39;&#39;Returns the replaced string&#39;&#39;&#39;
+		return self.compile(text)
+</div>
+<div class="viewcode-block" id="MathematicalSymbol"><a class="viewcode-back" href="../../../tk.latex.Symbols.html#tk.latex.Symbols.MathematicalSymbol">[docs]</a>class MathematicalSymbol(BaseSymbol):
+	&#39;&#39;&#39;Main class for mathematical symbols&#39;&#39;&#39;
+	def __init__(self, symbol, *commands):
+		self.replacer = SimpleReplace(symbol, *commands)
+		</div>
+<div class="viewcode-block" id="GreekLetter"><a class="viewcode-back" href="../../../tk.latex.Symbols.html#tk.latex.Symbols.GreekLetter">[docs]</a>class GreekLetter(BaseSymbol):
+	&#39;&#39;&#39;Main class for Greek Letters&#39;&#39;&#39;
+	def __init__(self, symbol, *commands):
+		self.replacer = SimpleReplace(symbol, *commands)</div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">tk 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../latex.html" >tk.latex</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Rushy Panchal.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

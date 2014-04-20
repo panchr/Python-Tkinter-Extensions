@@ -1,0 +1,669 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tk.graphics module &mdash; tk 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="tk 1.0.1 documentation" href="index.html" />
+    <link rel="up" title="tk package" href="tk.html" />
+    <link rel="next" title="tk.setup module" href="tk.setup.html" />
+    <link rel="prev" title="tk.graphTools module" href="tk.graphTools.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tk.setup.html" title="tk.setup module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tk.graphTools.html" title="tk.graphTools module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">tk 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="tk.html" accesskey="U">tk package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-tk.graphics">
+<span id="tk-graphics-module"></span><h1>tk.graphics module<a class="headerlink" href="#module-tk.graphics" title="Permalink to this headline">¶</a></h1>
+<p>Simple object oriented graphics library</p>
+<p>The library is designed to make it very easy for novice programmers to
+experiment with computer graphics in an object oriented fashion. It is
+written by John Zelle for use with the book &#8220;Python Programming: An
+Introduction to Computer Science&#8221; (Franklin, Beedle &amp; Associates).</p>
+<p>LICENSE: This is open-source software released under the terms of the
+GPL (<a class="reference external" href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a>).</p>
+<p>PLATFORMS: The package is a wrapper around Tkinter and should run on
+any platform where Tkinter is available.</p>
+<p>INSTALLATION: Put this file somewhere where Python can see it.</p>
+<p>OVERVIEW: There are two kinds of objects in the library. The GraphWin
+class implements a window where drawing can be done and various
+GraphicsObjects are provided that can be drawn into a GraphWin. As a
+simple example, here is a complete program to draw a circle of radius
+10 centered in a 100x100 window:</p>
+<blockquote>
+<div>from Tkinter import *</div></blockquote>
+<dl class="docutils">
+<dt>except ImportError:</dt>
+<dd>from tkinter import *</dd>
+<dt>def main():</dt>
+<dd>root = Tk()
+win = GraphWin(root, 100, 100)
+c = Circle(Point(50,50), 10)
+c.draw(win)
+win.getMouse() # Pause window</dd>
+</dl>
+<div class="section" id="main">
+<h2>main()<a class="headerlink" href="#main" title="Permalink to this headline">¶</a></h2>
+<p>GraphWin objects support coordinate transformation through the
+setCoords method and pointer-based input through getMouse.</p>
+<dl class="docutils">
+<dt>The library provides the following graphical objects:</dt>
+<dd>Point
+Line
+Circle
+Oval
+Rectangle
+Polygon
+Text
+Entry (for text-based input)
+Image</dd>
+</dl>
+<p>Various attributes of graphical objects can be set such as
+outline-color, fill-color and line-width. Graphical objects also
+support moving and hiding for animation effects.</p>
+<p>The library also provides a very simple class for pixel-based image
+manipulation, Pixmap. A pixmap can be loaded from a file and displayed
+using an Image object. Both getPixel and setPixel methods are provided
+for manipulating the image.</p>
+<p>DOCUMENTATION: For complete documentation, see Chapter 4 of &#8220;Python
+Programming: An Introduction to Computer Science&#8221; by John Zelle,
+published by Franklin, Beedle &amp; Associates.  Also see
+<a class="reference external" href="http://mcsp.wartburg.edu/zelle/python">http://mcsp.wartburg.edu/zelle/python</a> for a quick reference</p>
+<dl class="class">
+<dt id="tk.graphics.Circle">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Circle</tt><big>(</big><em>center</em>, <em>radius</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tk.graphics.Oval" title="tk.graphics.Oval"><tt class="xref py py-class docutils literal"><span class="pre">tk.graphics.Oval</span></tt></a></p>
+<dl class="method">
+<dt id="tk.graphics.Circle.clone">
+<tt class="descname">clone</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Circle.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Circle.clone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Circle.getRadius">
+<tt class="descname">getRadius</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Circle.getRadius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Circle.getRadius" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.Entry">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Entry</tt><big>(</big><em>p</em>, <em>width</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tk.graphics.GraphicsObject" title="tk.graphics.GraphicsObject"><tt class="xref py py-class docutils literal"><span class="pre">tk.graphics.GraphicsObject</span></tt></a></p>
+<dl class="method">
+<dt id="tk.graphics.Entry.clone">
+<tt class="descname">clone</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry.clone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Entry.getAnchor">
+<tt class="descname">getAnchor</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry.getAnchor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry.getAnchor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Entry.getText">
+<tt class="descname">getText</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry.getText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry.getText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Entry.setFace">
+<tt class="descname">setFace</tt><big>(</big><em>face</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry.setFace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry.setFace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Entry.setFill">
+<tt class="descname">setFill</tt><big>(</big><em>color</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry.setFill"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry.setFill" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Entry.setSize">
+<tt class="descname">setSize</tt><big>(</big><em>size</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry.setSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry.setSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Entry.setStyle">
+<tt class="descname">setStyle</tt><big>(</big><em>style</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry.setStyle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry.setStyle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Entry.setText">
+<tt class="descname">setText</tt><big>(</big><em>t</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry.setText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry.setText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Entry.setTextColor">
+<tt class="descname">setTextColor</tt><big>(</big><em>color</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Entry.setTextColor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Entry.setTextColor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.GraphWin">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">GraphWin</tt><big>(</big><em>master=None</em>, <em>width=200</em>, <em>height=200</em>, <em>autoflush=True</em>, <em>row=None</em>, <em>column=None</em>, <em>padx=None</em>, <em>pady=None</em>, <em>title='Graphics Window'</em>, <em>save_image=False</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">Tkinter.Canvas</span></tt></p>
+<p>A GraphWin is a toplevel window for displaying graphics.</p>
+<dl class="method">
+<dt id="tk.graphics.GraphWin.checkMouse">
+<tt class="descname">checkMouse</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.checkMouse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.checkMouse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return last mouse click or None if mouse has
+not been clicked since last call</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.clear">
+<tt class="descname">clear</tt><big>(</big><em>*items</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the window</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.flush">
+<tt class="descname">flush</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.flush"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.flush" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update drawing to the window</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.getHeight">
+<tt class="descname">getHeight</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.getHeight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.getHeight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the height of the window</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.getMouse">
+<tt class="descname">getMouse</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.getMouse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.getMouse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait for mouse click and return Point object representing
+the click</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.getWidth">
+<tt class="descname">getWidth</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.getWidth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.getWidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the width of the window</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.isClosed">
+<tt class="descname">isClosed</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.isClosed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.isClosed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.isOpen">
+<tt class="descname">isOpen</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.isOpen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.isOpen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.plot">
+<tt class="descname">plot</tt><big>(</big><em>x</em>, <em>y</em>, <em>color='black'</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set pixel (x,y) to the given color</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.plotPixel">
+<tt class="descname">plotPixel</tt><big>(</big><em>x</em>, <em>y</em>, <em>color='black'</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.plotPixel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.plotPixel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set pixel raw (independent of window coordinates) pixel
+(x,y) to color</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.save">
+<tt class="descname">save</tt><big>(</big><em>filepath='graphwin.jpg'</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the drawn image under the given filepath</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.saveImage">
+<tt class="descname">saveImage</tt><big>(</big><em>filepath='graphwin.jpg'</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.saveImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.saveImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated (but maintained for backwards compatability), please use GraphWin.save</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.setBackground">
+<tt class="descname">setBackground</tt><big>(</big><em>color</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.setBackground"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.setBackground" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set background color of the window</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.setCoords">
+<tt class="descname">setCoords</tt><big>(</big><em>x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.setCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.setCoords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set coordinates of window to run from (x1,y1) in the
+lower-left corner to (x2,y2) in the upper-right corner.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.setMouseHandler">
+<tt class="descname">setMouseHandler</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.setMouseHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.setMouseHandler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.title">
+<tt class="descname">title</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Titles the main</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.toScreen">
+<tt class="descname">toScreen</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.toScreen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.toScreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns pixel coordinates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.toWorld">
+<tt class="descname">toWorld</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.toWorld"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.toWorld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns custom coordinates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.translate">
+<tt class="descname">translate</tt><big>(</big><em>x</em>, <em>y</em>, <em>mode='local'</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates the (x, y) pixel coordinate to the custom coordinates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphWin.translateCustom">
+<tt class="descname">translateCustom</tt><big>(</big><em>x</em>, <em>y</em>, <em>mode='local'</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphWin.translateCustom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphWin.translateCustom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates custom coordinates to pixel coordinates</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="tk.graphics.GraphicsError">
+<em class="property">exception </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">GraphicsError</tt><a class="reference internal" href="_modules/tk/graphics.html#GraphicsError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphicsError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Generic error class for graphics module exceptions.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.GraphicsObject">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">GraphicsObject</tt><big>(</big><em>options</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphicsObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphicsObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic base class for all of the drawable objects</p>
+<dl class="method">
+<dt id="tk.graphics.GraphicsObject.draw">
+<tt class="descname">draw</tt><big>(</big><em>graphwin</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphicsObject.draw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphicsObject.draw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphicsObject.getColor">
+<tt class="descname">getColor</tt><big>(</big><em>attribute</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphicsObject.getColor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphicsObject.getColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the color</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphicsObject.move">
+<tt class="descname">move</tt><big>(</big><em>dx</em>, <em>dy</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphicsObject.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphicsObject.move" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphicsObject.setFill">
+<tt class="descname">setFill</tt><big>(</big><em>color</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphicsObject.setFill"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphicsObject.setFill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set interior color to color</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphicsObject.setOutline">
+<tt class="descname">setOutline</tt><big>(</big><em>color</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphicsObject.setOutline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphicsObject.setOutline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set outline color to color</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphicsObject.setWidth">
+<tt class="descname">setWidth</tt><big>(</big><em>width</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphicsObject.setWidth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphicsObject.setWidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set line weight to width</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.GraphicsObject.undraw">
+<tt class="descname">undraw</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#GraphicsObject.undraw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.GraphicsObject.undraw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.Image">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Image</tt><big>(</big><em>p</em>, <em>*pixmap</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tk.graphics.GraphicsObject" title="tk.graphics.GraphicsObject"><tt class="xref py py-class docutils literal"><span class="pre">tk.graphics.GraphicsObject</span></tt></a></p>
+<dl class="method">
+<dt id="tk.graphics.Image.clone">
+<tt class="descname">clone</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Image.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Image.clone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Image.getAnchor">
+<tt class="descname">getAnchor</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Image.getAnchor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Image.getAnchor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Image.getHeight">
+<tt class="descname">getHeight</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Image.getHeight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Image.getHeight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the height of the image in pixels</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Image.getPixel">
+<tt class="descname">getPixel</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Image.getPixel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Image.getPixel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list [r,g,b] with the RGB color values for pixel (x,y)
+r,g,b are in range(256)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Image.getWidth">
+<tt class="descname">getWidth</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Image.getWidth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Image.getWidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the width of the image in pixels</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tk.graphics.Image.idCount">
+<tt class="descname">idCount</tt><em class="property"> = 0</em><a class="headerlink" href="#tk.graphics.Image.idCount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tk.graphics.Image.imageCache">
+<tt class="descname">imageCache</tt><em class="property"> = {}</em><a class="headerlink" href="#tk.graphics.Image.imageCache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Image.save">
+<tt class="descname">save</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Image.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Image.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the pixmap image to filename.
+The format for the save image is determined from the filname extension.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Image.setPixel">
+<tt class="descname">setPixel</tt><big>(</big><em>x</em>, <em>y</em>, <em>color</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Image.setPixel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Image.setPixel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets pixel (x,y) to the given color</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Image.undraw">
+<tt class="descname">undraw</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Image.undraw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Image.undraw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.Line">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Line</tt><big>(</big><em>p1</em>, <em>p2</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tk.graphics._BBox</span></tt></p>
+<dl class="method">
+<dt id="tk.graphics.Line.clone">
+<tt class="descname">clone</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Line.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Line.clone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Line.setArrow">
+<tt class="descname">setArrow</tt><big>(</big><em>option</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Line.setArrow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Line.setArrow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.Oval">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Oval</tt><big>(</big><em>p1</em>, <em>p2</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Oval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Oval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tk.graphics._BBox</span></tt></p>
+<dl class="method">
+<dt id="tk.graphics.Oval.clone">
+<tt class="descname">clone</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Oval.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Oval.clone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.Point">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Point</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tk.graphics.GraphicsObject" title="tk.graphics.GraphicsObject"><tt class="xref py py-class docutils literal"><span class="pre">tk.graphics.GraphicsObject</span></tt></a></p>
+<dl class="method">
+<dt id="tk.graphics.Point.clone">
+<tt class="descname">clone</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Point.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Point.clone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Point.getX">
+<tt class="descname">getX</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Point.getX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Point.getX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Point.getY">
+<tt class="descname">getY</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Point.getY"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Point.getY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.Polygon">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Polygon</tt><big>(</big><em>*points</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Polygon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Polygon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tk.graphics.GraphicsObject" title="tk.graphics.GraphicsObject"><tt class="xref py py-class docutils literal"><span class="pre">tk.graphics.GraphicsObject</span></tt></a></p>
+<dl class="method">
+<dt id="tk.graphics.Polygon.clone">
+<tt class="descname">clone</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Polygon.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Polygon.clone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Polygon.getPoints">
+<tt class="descname">getPoints</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Polygon.getPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Polygon.getPoints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.Rectangle">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Rectangle</tt><big>(</big><em>p1</em>, <em>p2</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Rectangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Rectangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tk.graphics._BBox</span></tt></p>
+<dl class="method">
+<dt id="tk.graphics.Rectangle.clone">
+<tt class="descname">clone</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Rectangle.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Rectangle.clone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.Text">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Text</tt><big>(</big><em>p</em>, <em>text</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tk.graphics.GraphicsObject" title="tk.graphics.GraphicsObject"><tt class="xref py py-class docutils literal"><span class="pre">tk.graphics.GraphicsObject</span></tt></a></p>
+<dl class="method">
+<dt id="tk.graphics.Text.clone">
+<tt class="descname">clone</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Text.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Text.clone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Text.getAnchor">
+<tt class="descname">getAnchor</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Text.getAnchor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Text.getAnchor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Text.getText">
+<tt class="descname">getText</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Text.getText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Text.getText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Text.setFace">
+<tt class="descname">setFace</tt><big>(</big><em>face</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Text.setFace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Text.setFace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Text.setSize">
+<tt class="descname">setSize</tt><big>(</big><em>size</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Text.setSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Text.setSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Text.setStyle">
+<tt class="descname">setStyle</tt><big>(</big><em>style</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Text.setStyle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Text.setStyle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Text.setText">
+<tt class="descname">setText</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Text.setText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Text.setText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Text.setTextColor">
+<tt class="descname">setTextColor</tt><big>(</big><em>color</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Text.setTextColor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Text.setTextColor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk.graphics.Transform">
+<em class="property">class </em><tt class="descclassname">tk.graphics.</tt><tt class="descname">Transform</tt><big>(</big><em>w</em>, <em>h</em>, <em>xlow</em>, <em>ylow</em>, <em>xhigh</em>, <em>yhigh</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal class for 2-D coordinate transformations</p>
+<dl class="method">
+<dt id="tk.graphics.Transform.screen">
+<tt class="descname">screen</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Transform.screen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Transform.screen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tk.graphics.Transform.world">
+<tt class="descname">world</tt><big>(</big><em>xs</em>, <em>ys</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#Transform.world"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.Transform.world" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tk.graphics.color_rgb">
+<tt class="descclassname">tk.graphics.</tt><tt class="descname">color_rgb</tt><big>(</big><em>r</em>, <em>g</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#color_rgb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.color_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>r,g,b are intensities of red, green, and blue in range(256)
+Returns color specifier string for the resulting color</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tk.graphics.drawAll">
+<tt class="descclassname">tk.graphics.</tt><tt class="descname">drawAll</tt><big>(</big><em>window</em>, <em>*itemsToDraw</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#drawAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.drawAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw all items to a window</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tk.graphics.redrawAll">
+<tt class="descclassname">tk.graphics.</tt><tt class="descname">redrawAll</tt><big>(</big><em>window</em>, <em>*itemsToRedraw</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#redrawAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.redrawAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Redraws all items to a window</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tk.graphics.test">
+<tt class="descclassname">tk.graphics.</tt><tt class="descname">test</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tk.graphics.undrawAll">
+<tt class="descclassname">tk.graphics.</tt><tt class="descname">undrawAll</tt><big>(</big><em>*itemsToUndraw</em><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#undrawAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.undrawAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undraws all items from a window</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tk.graphics.update">
+<tt class="descclassname">tk.graphics.</tt><tt class="descname">update</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tk/graphics.html#update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk.graphics.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tk.graphics module</a><ul>
+<li><a class="reference internal" href="#main">main()</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tk.graphTools.html"
+                        title="previous chapter">tk.graphTools module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tk.setup.html"
+                        title="next chapter">tk.setup module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tk.graphics.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tk.setup.html" title="tk.setup module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tk.graphTools.html" title="tk.graphTools module"
+             >previous</a> |</li>
+        <li><a href="index.html">tk 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="tk.html" >tk package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Rushy Panchal.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

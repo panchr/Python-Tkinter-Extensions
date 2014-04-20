@@ -131,6 +131,20 @@ def extractFromDict(dictionary, options):
 		return_values.append(option_value)
 	return return_values
 	
+def dictGet(dictionary, key, default = None, delete = True):
+	'''Returns dictionary.get(key, default), and deletes the key if "delete" is True
+	
+	dictGet({"x": 5}, "x", 7) --> 5
+	dictGet({"x": 5}, "y", 7) --> 7'''
+	not_found = str(dictionary) + str(key) + str(default)
+	value = dictionary.get(key, not_found)
+	if value == not_found:
+		return default
+	else:
+		if delete:
+			del dictionary[key]
+		return value
+	
 def gridWidgets(widgets, **options):
 	'''Grids the widgets. widgets should look like:
 		[
@@ -475,10 +489,18 @@ class BaseCustomWidget(object):
 	def addCalltip(self, **options):
 		'''Adds a calltip to the base widget
 		
-		For further documentation, refer to the Calltip documentation
+		For further reference, refer to the Calltip documentation
 		
 		returns None'''
 		self.calltip = Calltip(self, **options)
+	
+	def bind(self, sequence = None, func = None, add = None):
+		'''Binds the function "func" to the Event "sequence"
+		
+		For further reference, refer to the Tkinter bind method
+		
+		returns None'''
+		self.mainFrame.bind(sequence, func, add)
 	
 	def grid(self, *args, **kwargs):
 		'''Grids the widget, using self.mainFrame.grid
@@ -521,9 +543,78 @@ class FrameBase(Frame):
 class EntryBase(Entry):
 	'''Mock class for disambiguity --- do not extend directly'''
 	pass
-	
-### Inherited classes that add on to existing Tkinter classes
-	
+
+### Inherited/Extension classes that add on to existing Tkinter classes
+
+class tk(object):
+	'''Provides functions and additions to standard Tkinter widgets
+
+	Arguments:
+		widget - widget to be used'''
+	delta = 0.01
+
+	def __init__(self, widget, **options):
+		self.widget = widget
+		self.time = options.get('time', 1)
+		self.options = options
+
+	def initializeAnimation(self, time = None):
+		'''Initializes an animation --- internal function'''
+		if time:
+			self.time = time
+		self.widget.update()
+		self.delta = self.delta / self.time
+		self.time = 1
+
+	def slide(self, time = None):
+		'''Slides a widget up or down, depending on the current state (optional time parameter)
+
+		returns None'''
+		self.initializeAnimation(time)
+		if self.widget.winfo_height() == 1:
+			self.slideDown(time, False)
+		else:
+			self.slideUp(time, False)
+
+	def slideUp(self, time = None, initialize = True):
+		'''Slides the widget up (optional time parameter)
+
+		returns None'''
+		if initialize:
+			self.initializeAnimation(time)
+		start = self.widget.winfo_width()
+		self.widget.previous_height = start
+		self.widget.current_animation = "slide-up"
+		def changeHeight(percent):
+			'''Changes the height by a percent'''
+			self.widget.configure(height = start * percent)
+			if percent > 0 and self.widget.current_animation == "slide-up":
+				self.widget.after(self.time, lambda: changeHeight(percent - self.delta))
+		if start > 0:
+			changeHeight(1)
+
+	def slideDown(self, time = None, initialize = False):
+		'''Slides a widget down (optional time parameter)
+
+		returns None'''
+		if initialize:
+			self.initializeAnimation(time)
+		new = self.options.get("new")
+		start = self.widget.winfo_height()
+		end = new if new else start
+		self.widget.current_animation = "slide-down"
+		if end == 1:
+			try:
+				end = self.widget.previous_height
+			except AttributeError:
+				raise ValueError("Cannot calculate new height")
+		def changeHeight(percent):
+			self.widget.configure(height = end * percent)
+			if percent < 1 and self.widget.current_animation == "slide-down":
+				self.widget.after(self.time, lambda: changeHeight(percent + self.delta))
+		if start == 1:
+			changeHeight(0)
+
 class Tk(BaseWindow, TkBase):
 	'''Inherited class that adds methods to tk.Tk
 	

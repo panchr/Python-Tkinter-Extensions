@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tk.latex.LatexText &mdash; tk 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="tk 1.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="tk.latex" href="../latex.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">tk 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../latex.html" accesskey="U">tk.latex</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tk.latex.LatexText</h1><div class="highlight"><pre>
+# coding=utf-8
+# tk/latex/LatexText.py
+# Rushy Panchal
+# v1.0
+
+&#39;&#39;&#39;Provides the main Text wrapper for Tkinter Latex displays&#39;&#39;&#39;
+
+try: from Tkinter import *
+except ImportError: from tkinter import *
+import re
+from tk.latex import *
+from latexConstants import *
+
+subscript_pattern = re.compile(&quot;&lt;sub&gt;(.+)&lt;/sub&gt;&quot;, IGNORECASE)
+superscript_pattern = re.compile(&quot;&lt;sup&gt;(.+)&lt;/sup&gt;&quot;, IGNORECASE)
+division_pattern = re.compile(&quot;&lt;num&gt;(.+)&lt;/num&gt;&lt;div&gt;(.+)&lt;/div&gt;&quot;, IGNORECASE)
+
+<div class="viewcode-block" id="LatexText"><a class="viewcode-back" href="../../../tk.latex.LatexText.html#tk.latex.LatexText.LatexText">[docs]</a>class LatexText(Text):
+	&#39;&#39;&#39;Latex-type display of Text&#39;&#39;&#39;
+	def __init__(self, master = None, cnf = {},*args, **kwargs):
+		Text.__init__(self, master, cnf, *args, **kwargs)
+		self.text = None
+		self.tag_configure(&quot;subscript&quot;, offset = -4)
+		self.tag_configure(&quot;superscript&quot;, offset = 4)
+		# create the appropiate tags - for Fractions, have it multiline in smaller font size OR use subscripts for numerator and superscripts for denominator?
+	
+<div class="viewcode-block" id="LatexText.insert"><a class="viewcode-back" href="../../../tk.latex.LatexText.html#tk.latex.LatexText.LatexText.insert">[docs]</a>	def insert(self, index, text):
+		&#39;&#39;&#39;Inserts the selected text in Latex-format at the given index&#39;&#39;&#39;
+		if not isinstance(text, CompiledLatex):
+			text = Latex(text).compile()
+		self.text = text
+		for match in subscript_pattern.finditer(self.text):
+			if match:
+				self.insertSubscript(match.start(), match.group(1))
+		for match in superscript_pattern.finditer(self.text):
+			if match:
+				self.insertSuperscript(match.start(), match.group(1))
+		# have to find method for Fractions
+		</div>
+<div class="viewcode-block" id="LatexText.insertSubscript"><a class="viewcode-back" href="../../../tk.latex.LatexText.html#tk.latex.LatexText.LatexText.insertSubscript">[docs]</a>	def insertSubscript(self, index, text):
+		&#39;&#39;&#39;Internal method - Inserts text as a subscript at the given index&#39;&#39;&#39;
+		Text.insert(self, index, text, &quot;subscript&quot;)
+		</div>
+<div class="viewcode-block" id="LatexText.insertSuperscript"><a class="viewcode-back" href="../../../tk.latex.LatexText.html#tk.latex.LatexText.LatexText.insertSuperscript">[docs]</a>	def insertSuperscript(self, index, text):
+		&#39;&#39;&#39;Internal method - Inserts text as a superscript at the given index&#39;&#39;&#39;
+		Text.insert(self, index, text, &quot;superscript&quot;)
+		</div>
+<div class="viewcode-block" id="LatexText.insertFraction"><a class="viewcode-back" href="../../../tk.latex.LatexText.html#tk.latex.LatexText.LatexText.insertFraction">[docs]</a>	def insertFraction(self, index, num, denom):
+		&#39;&#39;&#39;Internal method - inserts a Fraction (of numerator/denominator at the given index&#39;&#39;&#39;
+		pass</div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">tk 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../latex.html" >tk.latex</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Rushy Panchal.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

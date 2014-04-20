@@ -2,8 +2,26 @@
 # Rushy Panchal
 # v1.0
 
-'''tk includes extensions upon the native graphics in Python, Tkinter (or tkinter for Python 3.3.
+'''tk includes extensions upon the native graphics in Python, Tkinter (or tkinter for Python 3.3).
 It builds upon existing classes and widgets, adding increasing functionality.
+
+There are various functions and classes that are available.
+
+MODULES:
+	graphics
+	graphTools
+	tkBase
+	tkExtra
+	ttkExtra
+	
+SUBPACKAGES:
+	latex
+		latexConstants
+		Symbols
+		LatexTest
+		ttkLatexText
+		
+Developed and maintained by Rushy Panchal. Copyright 2013 - 2014.
 '''
 
 try:
@@ -28,7 +46,10 @@ modules = {
 	'latex': {
 		'base': [
 			'__init__.py',
-			'Symbols.py'
+			'latexConstants.py',
+			'Symbols.py',
+			'LatexText.py',
+			'ttkLatexText.py'
 			]
 		}
 	}
