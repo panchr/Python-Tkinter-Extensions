@@ -15,10 +15,10 @@ All modules:
 * graphics
 * graphTools
 * latex:
---* latexConstants
---* Symbols
---* LatexText
---* ttkLatexText
+	* latexConstants
+	* Symbols
+	* LatexText
+	* ttkLatexText
 
 Latest Additions:
 ----------------------
