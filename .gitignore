@@ -30,6 +30,8 @@ nosetests.xml
 # Translations
 *.mo
 
+__init__.py
+
 # Mr Developer
 .mr.developer.cfg
 .project
